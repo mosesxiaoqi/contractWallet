@@ -22,6 +22,11 @@ contract MultiSigWallet {
     event ProposalCreated(uint256 id, address proposer, address to, uint256 value, bytes data);
     event Voted(uint256 id, address voter);
     event Executed(uint256 id);
+    event Deposit(address sender, uint256 amount);
+
+    receive() external payable {
+        emit Deposit(msg.sender, msg.value);
+  }
 
     // 构造函数
     constructor(address[] memory _owners, uint256 _required) {
